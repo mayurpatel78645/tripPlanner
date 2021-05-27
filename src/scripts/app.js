@@ -38,8 +38,7 @@ const originsHtml = (element) => {
   </li>`
 }
 
-const render = async(userSearch) => {
-  const originsArray = await originsDataArray(userSearch);
+function renderOrigin(originsArray) {
   const origins = document.querySelector('.origins');
   origins.innerHTML = '';
   originsArray.forEach(element => {
@@ -48,8 +47,25 @@ const render = async(userSearch) => {
   });
 }
 
+function renderDestination(originsArray) {
+  console.log('reaching');
+  const destinations = document.querySelector('.destinations');
+  destinations.innerHTML = '';
+  originsArray.forEach(element => {
+    const htmlString = originsHtml(element);
+    destinations.insertAdjacentHTML('beforeend', htmlString);
+  });
+}
+
+const render = async(userSearch, inputName) => {
+  const originsArray = await originsDataArray(userSearch);
+  if (inputName === 'Origin') return renderOrigin(originsArray);
+  console.log('pass here')
+  if (inputName === 'Destinations') return renderDestination(originsArray);
+}
+
 const originForm = document.querySelector('.origin-form');
-//const destinationForm = document.querySelector('.destination-form');
+const destinationForm = document.querySelector('.destination-form');
 const handleSelected = (e) => {
   const eventTarget = e.target;
   removeSelected();
@@ -57,6 +73,7 @@ const handleSelected = (e) => {
     addSelected(eventTarget);
   }
 }
+
 function addSelected(eventTarget) {
   if (eventTarget.dataset.long) {
     console.log(eventTarget);
@@ -77,10 +94,20 @@ const handleOriginInput = (e) => {
   e.preventDefault();
   const eventTarget = e.target;
   const userSearch = eventTarget.firstElementChild.value;
-  render(userSearch);
+  render(userSearch, 'Origin');
   const origins = document.querySelector('.origins');
   origins.addEventListener('click', handleSelected);
 }
 
+const handleDestinationInput = (e) => {
+  e.preventDefault();
+  const eventTarget = e.target;
+  const userSearch = eventTarget.firstElementChild.value;
+  console.log(userSearch);
+  render(userSearch, 'Destinations');
+  const destinations = document.querySelector('.destinations');
+  destinations.addEventListener('click', handleSelected);
+}
+
 originForm.addEventListener('submit', handleOriginInput);
-//destinationForm.addEventListener('submit', handleOriginInput);
+destinationForm.addEventListener('submit', handleDestinationInput);
