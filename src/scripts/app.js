@@ -21,7 +21,7 @@ const dataArray = async(userSearch) => {
       latitude: item.center[1],
       longitude: item.center[0],
       name: item.text,
-      address: item.properties.address ?? '',
+      address: item.properties.address ?? item.place_name,
     }
     arrayOfObj.push(originsObj);
   });
@@ -30,9 +30,10 @@ const dataArray = async(userSearch) => {
 
 const html = (element) => {
   console.log('hey');
-  return `<li data-long="${element.longitude}" data-lat="${element.latitude}" class="">
-      <div class="name">${element.name}</div>
-      <div>${element.address}</div>
+  return `
+  <li data-long="${element.longitude}" data-lat="${element.latitude}" class="">
+    <div class="name">${element.name}</div>
+    <div>${element.address}</div>
   </li>`
 }
 
