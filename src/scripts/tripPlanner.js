@@ -25,7 +25,7 @@ const getPlansData = async() => {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-  }catch(err) {handleEdgeCase('Try selecting origin and destination or currently no buses are available')}
+  }catch(err) {handleEdgeCase('Try selecting unique origin and destination or currently no buses are available')}
 }
 
 const getIcons = () => {
