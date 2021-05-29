@@ -40,6 +40,7 @@ const html = (element) => {
 const renderOrigin = (originArray) => {
   const origins = document.querySelector('.origins');
   origins.innerHTML = '';
+  if (originArray.length === 0) return origins.innerHTML = 'NOT FOUND';
   originArray.forEach(element => {
     const htmlString = html(element);
     origins.insertAdjacentHTML('beforeend', htmlString);
@@ -49,6 +50,7 @@ const renderOrigin = (originArray) => {
 const renderDestination = (destinationsArray) => {
   const destinations = document.querySelector('.destinations');
   destinations.innerHTML = '';
+  if (destinationsArray.length === 0) return destinations.innerHTML = 'NOT FOUND';
   destinationsArray.forEach(element => {
     const htmlString = html(element);
     destinations.insertAdjacentHTML('beforeend', htmlString);
@@ -56,6 +58,7 @@ const renderDestination = (destinationsArray) => {
 }
 
 const render = async(userSearch, inputName) => {
+  if (userSearch === '') return document.querySelector('.my-trip').innerHTML = 'Type to search';
   const arrayOfObj = await dataArray(userSearch);
   if (inputName === 'origins') return renderOrigin(arrayOfObj);
   renderDestination(arrayOfObj);
