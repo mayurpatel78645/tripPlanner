@@ -129,7 +129,6 @@ const tripPlansObj = (segment) => {
 
 const renderData = async() => {
   const tripPlansData = await getPlansData();
-  console.log(tripPlansData);
   if (tripPlansData.plans.length === 0) return handleEdgeCase('TIME OT TAKE A CAB');
   const myTrip = document.querySelector('.my-trip');
   myTrip.innerHTML = '';
