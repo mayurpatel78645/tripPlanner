@@ -29,7 +29,6 @@ const dataArray = async(userSearch) => {
 }
 
 const html = (element) => {
-  console.log('hey');
   return `
   <li data-long="${element.longitude}" data-lat="${element.latitude}" class="">
     <div class="name">${element.name}</div>
@@ -96,7 +95,6 @@ const handleInputEvent = (e) => {
   const eventTarget = e.target;
   const userSearch = eventTarget.firstElementChild.value;
   const ulName = `${eventTarget.className.slice(0, -5)}s`;
-  console.log(ulName);
   render (userSearch, ulName);
   document.querySelector(`.${ulName}`).addEventListener('click', handleSelected);
 }
